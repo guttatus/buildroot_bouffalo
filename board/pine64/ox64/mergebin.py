@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Description: Merge the Kernel, DTB, and OpenSBI into a single binary
+# Description: Merge the Kernel, DTB, and RustSBI into a single binary
 # From @BBBSnowball 
 import struct
 import argparse
@@ -10,7 +10,7 @@ MB = 1024*1024
 
 VM_BOOT_SECTION_HEADER = 0
 VM_BOOT_SECTION_DTB = 1
-VM_BOOT_SECTION_OPENSBI = 2
+VM_BOOT_SECTION_RUSTSBI = 2
 VM_BOOT_SECTION_KERNEL = 3
 
 
@@ -69,7 +69,7 @@ class FlashRegions(object):
         # typedef enum {
         #     VM_BOOT_SECTION_HEADER = 0,
         #     VM_BOOT_SECTION_DTB
-        #     VM_BOOT_SECTION_OPENSBI,
+        #     VM_BOOT_SECTION_RUSTSBI,
         #     VM_BOOT_SECTION_KERNEL,
         #     VM_BOOT_SECTION_MAX,
         # } vm_boot_section_t;
@@ -104,19 +104,19 @@ def make_regions():
     regions = FlashRegions(7*MB)
     regions.add('header',      None,                    VM_BOOT_SECTION_HEADER,     whole_img_base,                                             max_size=0x100)
     regions.add("dtb",         args.dtb,                VM_BOOT_SECTION_DTB,        whole_img_base + regions.header.max_size,                   max_size=0x10000)
-    regions.add("opensbi",     args.sbi,           VM_BOOT_SECTION_OPENSBI,    regions.dtb.flash_offset + regions.dtb.max_size,            max_size=0x20000)
-    regions.add("linux",       args.kernel,             VM_BOOT_SECTION_KERNEL,     regions.opensbi.flash_offset + regions.opensbi.max_size    )
+    regions.add("rustsbi",     args.sbi,           VM_BOOT_SECTION_RUSTSBI,    regions.dtb.flash_offset + regions.dtb.max_size,            max_size=0x40000)
+    regions.add("linux",       args.kernel,             VM_BOOT_SECTION_KERNEL,     regions.rustsbi.flash_offset + regions.rustsbi.max_size    )
     return regions
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
                     prog = 'mergebin.py',
-                    description = 'Creates a Single Binary Image of the kernel, opensbi and dts files')
+                    description = 'Creates a Single Binary Image of the kernel, rustsbi and dts files')
     parser.add_argument('-o', '--output', help='Output file name', required=True)
     parser.add_argument('-d', '--dtb', help='DTB file name', required=True)
     parser.add_argument('-k', '--kernel', help='Kernel file name', required=True)
-    parser.add_argument('-s', '--sbi', help='OpenSBI file name', required=True)
+    parser.add_argument('-s', '--sbi', help='RustSBI file name', required=True)
     args = parser.parse_args()
 
     regions = make_regions()

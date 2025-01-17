@@ -5,7 +5,7 @@
 ```
 mkdir buildroot_bouffalo && cd buildroot_bouffalo
 git clone https://github.com/buildroot/buildroot
-git clone https://github.com/openbouffalo/buildroot_bouffalo
+git clone https://github.com/guttatus/buildroot_bouffalo
 export BR_BOUFFALO_OVERLAY_PATH=$(pwd)/buildroot_bouffalo
 cd buildroot
 make BR2_EXTERNAL=$BR_BOUFFALO_OVERLAY_PATH pine64_ox64_defconfig
@@ -23,7 +23,7 @@ The SD card images are configured with a 1Gb Swap Partition, and will resize the
 Inside the downloads you will find the following files:
 * m0_lowload_bl808_m0.bin - This firmware runs on M0 and forwards interupts to the D0 for several peripherals
 * d0_lowload_bl808_d0.bin - This is a very basic bootloader that loads opensbi, the kernel and dts files into ram
-* bl808-firmware.bin - A image containing OpenSBI, Uboot and uboot dtb files. 
+* bl808-firmware.bin - A image containing RustSBI, Uboot and uboot dtb files. 
 * sdcard-*.tar.xz - A tarball containing the rootfs for the image to be flashed to the SD card
 
 ### Development images

@@ -4,8 +4,8 @@
 #
 ################################################################################
 
-OBLFR_VERSION = 2abd79917d67cc8213f71ee6da23d0ab83440f07
-OBLFR_SITE = $(call github,openbouffalo,OBLFR,$(OBLFR_VERSION))
+OBLFR_VERSION = 457dbf3829ee0cd4e4579d9249c1a72724a11934
+OBLFR_SITE = $(call github,guttatus,OBLFR,$(OBLFR_VERSION))
 OBLFR_INSTALL_IMAGES = YES
 OBLFR_INSTALL_TARGET = NO
 OBLFR_DEPENDENCIES = host-blmcusdk host-python3

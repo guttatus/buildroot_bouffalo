@@ -1,1 +1,2 @@
 source "$BR2_EXTERNAL_BOUFFALO_BR_PATH/boot/oblfr/Config.in"
+source "$BR2_EXTERNAL_BOUFFALO_BR_PATH/boot/rustsbi/Config.in"

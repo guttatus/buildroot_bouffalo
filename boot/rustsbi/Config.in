@@ -1,0 +1,11 @@
+config BR2_TARGET_RUSTSBI
+	bool "rustsbi"
+	depends on BR2_riscv
+	help
+    RustSBI Prototyper is a developing RISC-V Secure Bootloader solution. 
+    It can be integrated with the Rust or C language ecosystem to 
+    form a complete RISC-V bootloader ecosystem.		
+
+		https://github.com/openbouffalo/OBLFR
+
+
